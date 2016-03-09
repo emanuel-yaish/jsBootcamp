@@ -1,0 +1,95 @@
+.wrapper {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.directory-nav {
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.phone-book-section {
+    display: inline-block;
+    width: 650px;
+    min-height: 650px;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 15px;
+
+}
+
+.navbar ul {
+    padding: 0;
+}
+
+form span {
+    display: block;
+}
+
+form input {
+    display: block;
+    margin-top: 15px ;
+    margin-bottom: 15px;
+    line-height: 2;
+}
+
+.input-txt {
+    width: 600px;
+
+}
+
+.search-input {
+    width: 541px;
+    line-height: 2;
+
+}
+
+.search-btn {
+    line-height: 2;
+}
+
+.panel {
+    display: none;
+}
+
+
+.active {
+    display: block;
+}
+
+table {
+    width: 100%;
+}
+
+
+#defaults {
+    color: #ff0000;
+}
+
+#contactsTable {
+    text-align: center;
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+table {
+    text-align: center;
+    border: solid;
+    border-width: 1px;
+}
+
+table tr {
+    background-color: aquamarine;
+}
+
+ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.directory-nav a {
+    color: blue;
+}
