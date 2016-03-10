@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="main.css" rel="stylesheet" type="text/css">
+        <title>Title</title>
+    </head>
+    <body>
+        <div class="wrapper">
+
+            <!--HEADER-->
+            <header>
+                <span class="logo">Phone Book</span>
+            </header>
+
+            <hr />
+
+            <!-- GROUP NAVIGATION -->
+            <nav class="directory-nav">
+                <h4>Directory</h4>
+                <ul id="groupsList">
+                </ul>
+                <a id="defaults" href="javascript:resetToDefault()">Reset to defaults</a>
+            </nav>
+
+            <!-- PHONE BOOK -->
+            <div class="phone-book-section">
+                <!-- TAB AND SEARCH SECTION-->
+                <section>
+                    <h3 id="currentGroupHeader">Phone book</h3>
+                    <!--TABS NAVIGATION-->
+                    <nav class="navbar">
+                        <ul>
+                            <li><a href="javascript:showPanel('showContacts')">Show Contacts</a></li>
+                            <li><a href="javascript:showPanel('createContact')">Create Contact</a></li>
+                            <li><a href="javascript:showPanel('createGroup')">Create Group</a></li>
+                            <li><a href="javascript:showPanel('deleteGroup')">Delete Group</a></li>
+                        </ul>
+                    </nav>
+                    <input id="searchInput" class="search-input" type="text"/><button id="searchBtn" class="search-btn">Search</button>
+                </section>
+
+               <!-- SHOW CONTACTS-->
+                <section id="showContacts" class="panel">
+                    <h4>Contacts</h4>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Phones</th>
+                                <th id="deleteContact"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsTable">
+
+                        </tbody>
+                    </table>
+                 </section>
+
+                 <section id="createContact" class="panel">
+                     <h4>Create Contact</h4>
+                     <form id="createContactForm">
+                        <span >First name:</span>
+                        <input type="text" class="input-txt" id="firstName" />
+
+                        <span>Last name:</span>
+                        <input type="text" class="input-txt" id="lastName"  />
+
+                        <span>Phone:</span>
+                        <input type="text" class="input-txt" id="listOfNumbers" placeholder="insert first phone number here." />
+
+                        <div id="contactNumbersListContainer" >
+                        </div>
+
+                        <button id="addNumber"> + </button>
+
+                        <input type="submit" value="Submit" id="createContactBtn" />
+                    </form>
+                 </section>
+
+                <!--CREATEGROUP-->
+                <section id="createGroup" class="panel">
+                    <h4>create Group</h4>
+                    <form>
+                        <span>Group name:</span>
+                        <input type="text" class="input-txt" id="groupName" />
+
+                        <input type="submit" value="Submit" />
+                    </form>
+                </section>
+
+                <!-- SEARCH RESULTS -->
+                <section id="searchResults" class="panel">
+                    <h4>Contacts</h4>
+                    <table id="searchResultsContactsTable">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Phones</th>
+                            <th>Group name</th>
+                        </tr>
+                        </thead>
+                        <tbody id="searchResultsOFContactsTable">
+                        </tbody>
+                    </table>
+
+                    <br />
+
+                    <h4>Groups</h4>
+                    <table id="searchResultsGroupsTable">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>Parent group</th>
+                        </tr>
+                        </thead>
+                        <tbody id="searchResultsOFGroupsTable">
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+            <hr />
+
+            <footer>
+                <p>All Rights</p>
+            </footer>
+        </div>
+
+        <!--JAVASCRIPT-->
+        <script src="scripts.js"></script>
+
+    </body>
+</html>
