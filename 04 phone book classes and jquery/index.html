@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <title>classes and jquery</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!--HEADER-->
+        <header>
+            <h2 id="currentGroupHeader">Phone book</h2>
+            <!--TABS NAVIGATION-->
+        </header>
+        <!-- PHONE BOOK -->
+        <div class="phone-book-section">
+            <!-- TAB AND SEARCH SECTION-->
+            <nav id="mainNav" class="navbar">
+                    <ul id="groupNav">
+                        <li><a id="upBtn" data-id="#groupView" class="nav-btn" href="#"><img class="up-arrow" src="images/up_arrow_white-on-red.png"> Up </a></li>
+                        <li><a id="addContactBtn" data-id="#addContact" class="nav-btn" href="#">Add Contact</a></li>
+                        <li><a id="addGroupBtn" data-id="#addGroup" class="nav-btn" href="#">Add Group</a></li>
+                        <li class="search-li"><input id="searchInput" class="search-input" type="text"/><button id="searchBtn" class="search-btn">Search</button></li>
+                    </ul>
+                </nav>
+
+           <!-- class="panel" -->
+            <div class="display-container">
+                    <!-- SHOW CONTACTS AND GROUPS-->
+                    <div class="active" id="groupView">
+                    </div>
+
+                    <!-- Add CONTACT -->
+                    <div class="panel add-contact-tab" id="addContact">
+                        <h3 id="addContactHeader">Add Contact</h3>
+                        <div id="createContactForm">
+                            <span >First name:</span>
+                            <input type="text" class="input-txt" id="firstName" />
+
+                            <span>Last name:</span>
+                            <input type="text" class="input-txt" id="lastName"  />
+
+                            <span>Phone:</span>
+                            <input type="text" class="input-txt" id="listOfNumbers" placeholder="insert first phone number here." />
+
+                            <div id="contactNumbersListContainer" >
+                            </div>
+
+                            <button id="addNumber"> + </button>
+
+                            <button id="createContactBtn">submit</button>
+                        </div>
+                    </div>
+
+                    <!-- ADD GROUP -->
+                    <div id="addGroup" class="panel add-group-tab">
+                        <h3 id="addGroupHeader">Add Group</h3>
+                            <span>Group name:</span>
+                            <input type="text" class="input-txt" id="inputGroupName" />
+                            <button id="submitAddGroup">submit</button>
+                    </div>
+
+                <!-- SHOW CONTACT -->
+                <div id="showContact" class="panel">
+                </div>
+
+                <!-- SEARCH RESULT -->
+                <div id="searchResult" class="panel">
+                </div>
+            </div>
+        </div>
+
+        <!--MODAL-->
+        <div id="modal">
+            <h3>Are you sure ?</h3>
+            <button id="approved" data-id="">yes</button>
+            <button id="canceled">no</button>
+        </div>
+    </div>
+    <div id="screen"></div>
+
+    <!--JQUERY-->
+    <script src="jquery/jquery-1.12.1.js"></script>
+    <!--JAVASCRIPT-->
+    <script src="navCtlr.js"></script>
+    <script src="businessLogic/bookItem.js"></script>
+    <script src="businessLogic/Contact.js"></script>
+    <script src="businessLogic/group.js"></script>
+    <script src="businessLogic/phoneBook.js"></script>
+    <script src="views/addGroupView.js"></script>
+    <script src="views/addContactView.js"></script>
+    <script src="views/groupView.js"></script>
+    <script src="run.js"></script>
+
+</body>
+</html>

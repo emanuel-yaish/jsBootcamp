@@ -1,0 +1,297 @@
+body {
+    font-family: "Arial";
+}
+
+.wrapper {
+    width: 960px;
+    margin: 0 auto;
+    background-color: lightblue;
+    border: solid;
+    border-width: 1px;
+    border-color: darkred;
+}
+
+header {
+
+}
+
+h2 {
+    text-align: center;
+    text-decoration: underline;
+    color: black;
+    font-family: cursive;
+}
+
+nav {
+    border: 1px solid darkred;
+    border-left: none;
+    border-right: none;
+
+}
+
+.directory-nav {
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.phone-book-section {
+    display: inline-block;
+    width: 100%;
+    min-height: 850px;
+
+}
+
+/* tabs */
+.navbar li {
+    display: inline-block;
+    margin-right: 15px;
+
+}
+
+.navbar ul {
+    padding: 0;
+}
+
+/*forms and input tag*/
+#addGroup span, #createContactForm span {
+    display: block;
+}
+
+#addGroup input, #createContactForm input {
+    display: block;
+    margin-top: 15px ;
+    margin-bottom: 15px;
+    line-height: 2;
+}
+
+
+.input-txt {
+    width: 600px;
+
+}
+
+.search-li {
+    float: right;
+    margin-top: 7px;
+}
+
+/*search*/
+.search-input {
+    width: 200px;
+    line-height: 2;
+}
+
+.search-btn {
+    line-height: 2;
+    color: darkblue;
+    font-weight: 700;
+}
+
+/*nav tabs*/
+.panel {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.up-arrow {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+#defaults {
+    color: #ff0000;
+}
+
+/*tables*/
+#contactsTable {
+    text-align: center;
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border: solid;
+    border-width: 1px;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+tr:nth-child(odd) {
+    background-color: lightgrey;
+}
+
+ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.directory-nav a , nav a{
+    color: black;
+    text-decoration: none;
+}
+
+.directory-nav a:hover , nav a:hover {
+    text-decoration: underline;
+}
+
+h3 {
+    text-align: center;
+    text-decoration: underline;
+    color: blue;
+    text-transform: uppercase;
+    font-family: cursive;
+}
+
+#groupView img {
+    margin: 15px;
+    vertical-align: middle;
+}
+
+#groupView ul {
+    padding: 0;
+}
+
+#groupView li:nth-child(odd) {
+    background-color: #666666;
+}
+#groupView li:nth-child(even) {
+    background-color: #D4D7FE;
+}
+
+.add-group-tab {
+    width: 650px;
+    margin: 0 auto;
+}
+
+.add-contact-tab {
+    width: 650px;
+    margin: 0 auto;
+  }
+
+#createContactBtn, #submitAddGroup {
+    margin: 0 auto;
+    width: 150px;
+    height: 25px;
+    display: block;
+}
+
+.phone-num {
+    width: 600px !important;
+}
+
+#addNumber {
+    height: 35px;
+    width: 35px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    font-family: cursive;
+}
+
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.remove-item {
+    float: right;
+}
+
+#showContact h3 {
+    text-decoration: underline;
+    color: blue;
+}
+
+#showContact img {
+    vertical-align: middle;
+    margin: 15px;
+}
+
+#showContact ul {
+    padding: 0;
+}
+
+#showContact li {
+    text-align: center;
+}
+
+#showContact li:nth-child(odd) {
+    background-color: #666666;
+}
+#showContact li:nth-child(even) {
+    background-color: #D4D7FE;
+}
+
+#notFound {
+    font-weight: 800;
+    text-decoration: underline;
+    text-align: center;
+    color: red;
+    font-size: 34px;
+}
+
+#searchResult img {
+    margin: 15px;
+    vertical-align: middle;
+}
+
+#searchResult ul {
+    padding: 0;
+}
+
+#searchResult li:nth-child(odd) {
+    background-color: #666666;
+}
+
+#searchResult li:nth-child(even) {
+    background-color: #D4D7FE;
+}
+
+/******* modal section ******/
+#screen, #modal {
+    display: none;
+    position: fixed;
+}
+
+#screen {
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    background: rgba(0,0,0,0.35);
+    z-index: 1;
+}
+
+#modal {
+    width: 33.333%;
+    top: 20%;
+    left: 33.3333%;
+    background: darkred;
+    z-index: 2;
+    text-align: center;
+}
+
+#modal button {
+    margin: 15px;
+    padding: 5px;
+    background-color: cornflowerblue;
+    font-size: large;
+    font-family: cursive;
+    width: 55px;
+}
+
+#modal button:hover {
+    color: white;
+}
