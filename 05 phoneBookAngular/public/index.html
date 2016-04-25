@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="phoneBookApp" >
+<head>
+    <meta charset="UTF-8">
+    <link href="styles/main.css" rel="stylesheet" type="text/css">
+    <title>Angular Phone Book</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!--HEADER-->
+        <header>
+            <h2 id="currentGroupHeader">Angular Phone Book</h2>
+        </header>
+
+        <div ng-controller="NavCtrl as navCtrl" class="phone-book-section">
+            <!-- TAB AND SEARCH SECTION-->
+            <nav id="mainNav" class="navbar">
+                <ul id="groupNav">
+                    <li><a ng-click="navCtrl.upSelected('groupView')" id="upBtn" class="nav-btn" href="#"><img class="up-arrow" src="images/up_arrow_white-on-red.png"> Up </a></li>
+                    <li ng-if = navCtrl.notInShowContactMode()><a ng-click="navCtrl.addContactSelected('addContact')" id="addContactBtn" class="nav-btn" href="#">Add Contact</a></li>
+                    <li ng-if = navCtrl.notInShowContactMode()><a ng-click="navCtrl.addGroupSelected('addGroup')" id="addGroupBtn" class="nav-btn" href="#">Add Group</a></li>
+                    <li ng-if = navCtrl.notInShowContactMode() class="search-li"><input ng-model="navCtrl.keyWordInput" id="searchInput" class="search-input" type="text"/><button ng-click="navCtrl.searchSelected('searchResult')" id="searchBtn" class="search-btn">Search</button></li>
+                </ul>
+            </nav>
+
+            <!-- class="panel" -->
+            <div class="display-container">
+                <!-- SHOW CONTACTS AND GROUPS-->
+                <div ng-controller="GroupExplorerCtrl as groupExplorerCtrl" ng-show="navCtrl.isActive('groupView')" class="active" id="groupView">
+                    <h3>{{groupExplorerCtrl.phoneBookService.currentGroup.name}}</h3>
+                    <div ng-if="!groupExplorerCtrl.phoneBookService.currentGroup.items.length" class="empty">this group is empty!!</div>
+                    <ul>
+                        <li ng-repeat="item in groupExplorerCtrl.phoneBookService.currentGroup.items track by $index">
+                            <!-- item is a group -->
+                            <div ng-if="groupExplorerCtrl.isGroup(item)">
+                                <a ng-click="groupExplorerCtrl.groupSelected(item.id)" class='group-item' href='#'>
+                                    <img src='images/group.png' alt='group-img'/>{{item.name}}
+                                </a>
+                                <a ng-click="groupExplorerCtrl.deleteSelected(item.id)"  class='remove-item' href='#'>delete<img src='images/remove.png' alt='remove-img'/></a>
+                            </div>
+
+                            <!-- item is a contact -->
+                            <div ng-if="groupExplorerCtrl.isContact(item)">
+                                <a ng-click="groupExplorerCtrl.contactSelected(item)" class='contact-item' href='#'>
+                                <img src='images/contact.png' alt='group-img'/>{{item.firstName}} {{item.lastName}}
+                                </a>
+                                <a ng-click="groupExplorerCtrl.deleteSelected(item.id)" class='remove-item' href='#'>
+                                    delete
+                                    <img src='images/remove.png' alt='remove-img'/>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!--MODAL-->
+                    <div ng-if="groupExplorerCtrl.deleteState" class="modal">
+                        <h3>Are you sure ?</h3>
+                        <button ng-click="groupExplorerCtrl.approved()" class="approved">yes</button>
+                        <button ng-click="groupExplorerCtrl.canceled()" class="canceled">no</button>
+                    </div>
+                    <div ng-if="groupExplorerCtrl.deleteState" ng-click="groupExplorerCtrl.canceled()" class="screen"></div>
+                </div>
+
+                <!-- Add CONTACT -->
+                <div ng-controller="AddContactCtrl as addContactCtrl" ng-show="navCtrl.isActive('addContact')" class="panel add-contact-tab" id="addContact">
+                    <h3 id="addContactHeader">Add Contact</h3>
+                    <div id="createContactForm">
+                        <span >First name:</span>
+                        <input ng-model="addContactCtrl.firstName" type="text" class="input-txt" id="firstName"/>
+
+                        <span>Last name:</span>
+                        <input ng-model="addContactCtrl.lastName" type="text" class="input-txt" id="lastName"/>
+
+                        <span>Phone:</span>
+                        <input ng-model="addContactCtrl.firstNum" type="text" class="input-txt" id="listOfNumbers" placeholder="insert first phone number here." />
+
+                        <div id="contactNumbersListContainer">
+                            <input ng-repeat="number in addContactCtrl.phoneNumbers track by $index" ng-model="addContactCtrl.phoneNumbers[$index]" type="text" class="input-txt"  />
+                        </div>
+
+                        <!-- add phone input button -->
+                        <button id="addNumber" ng-click="addContactCtrl.addNumber()"> + </button>
+
+                        <!-- submit button -->
+                        <button ng-click="addContactCtrl.addNewContact()" id="createContactBtn">submit</button>
+                    </div>
+                </div>
+
+                <!-- ADD GROUP -->
+                <div ng-controller="AddGroupCtrl as addGroupCtrl" ng-show="navCtrl.isActive('addGroup')" id="addGroup" class="panel add-group-tab">
+                    <h3 id="addGroupHeader">Add Group</h3>
+                    <span>Group name:</span>
+                    <input ng-model="addGroupCtrl.newGroupName" type="text" class="input-txt" id="inputGroupName"/>
+                    <button ng-click="addGroupCtrl.addNewGroup()" id="submitAddGroup">submit</button>
+                </div>
+
+                <!-- SHOW CONTACT -->
+                <div ng-controller="ShowContactCtrl as showContactCtrl" ng-show="showContactCtrl.isActive('showContact')" id="showContact" class="panel">
+                    <h3>
+                        <img src='images/contact_zoom.png' alt='contact img'>{{showContactCtrl.PhoneBookService.selectedContact.firstName}} {{showContactCtrl.PhoneBookService.selectedContact.lastName}}
+                    </h3>
+                    <ul id='numbersContainer'>
+                        <li ng-repeat="phone in showContactCtrl.PhoneBookService.selectedContact.phoneNumbers track by $index"><img src='images/Phone.png' alt='phone img'>
+                            {{phone}}
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- SEARCH RESULT -->
+                <div ng-controller="SearchExplorerCtrl as searchExplorerCtrl" ng-show="navCtrl.isActive('searchResult')" id="searchResult" class="panel">
+                    <!-- todo sent from controller// -->
+                    <h3>RESULTS FOR: {{searchExplorerCtrl.phoneBookService.keyWord}}</h3>
+                    <p class="empty" ng-if="!searchExplorerCtrl.phoneBookService.searchResults.length">{{searchExplorerCtrl.phoneBookService.keyWord}} does not exist!</p>
+                    <ul>
+                        <!-- item is a group -->
+                        <li ng-repeat="searchItem in searchExplorerCtrl.phoneBookService.searchResults track by $index">
+                            <div ng-if="searchExplorerCtrl.isGroup(searchItem)">
+                                <a ng-click="searchExplorerCtrl.groupSelected(searchItem.id)" class='group-item' href='#'>
+                                    <img src='images/group.png' alt='group-img'/>
+                                    {{searchItem.name}}
+                                </a>
+                                <a ng-click="searchExplorerCtrl.deleteSelected(searchItem.id)" class='remove-item' href='#'>delete<img src='images/remove.png' alt='remove-img'/></a>
+                            </div>
+
+                            <!-- is a contact -->
+                            <div ng-if="searchExplorerCtrl.isContact(searchItem)">
+                                <a ng-click="searchExplorerCtrl.contactSelected(searchItem)" class='contact-item' href='#'>
+                                    <img src='images/contact.png' alt='group-img'/>{{searchItem.firstName}} {{searchItem.lastName}}
+                                </a>
+                                <a ng-click="searchExplorerCtrl.deleteSelected(searchItem.id)" class='remove-item' href='#'>
+                                    delete
+                                    <img src='images/remove.png' alt='remove-img'/>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!--MODAL-->
+                    <div ng-if="searchExplorerCtrl.deleteState" class="modal">
+                        <h3>Are you sure ?</h3>
+                        <button ng-click="searchExplorerCtrl.approved()" class="approved">yes</button>
+                        <button ng-click="searchExplorerCtrl.canceled()" class="canceled">no</button>
+                    </div>
+                    <div ng-if="searchExplorerCtrl.deleteState" ng-click="searchExplorerCtrl.canceled()" class="screen"></div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+    <!-- scripts -->
+    <script src="scripts/angular.js"></script>
+    <script src="businessLogic/bookItem.js"></script>
+    <script src="businessLogic/contact.js"></script>
+    <script src="businessLogic/group.js"></script>
+    <script src="businessLogic/phoneBook.js"></script>
+    <script src="scripts/run.js"></script>
+    <script src="angularServices/phoneBookService.js"></script>
+    <script src="angularCtrls/navCtrl.js"></script>
+    <script src="angularCtrls/groupExplorerCtrl.js"></script>
+    <script src="angularCtrls/searchCtrl.js"></script>
+    <script src="angularCtrls/addContactCtrl.js"></script>
+    <script src="angularCtrls/addGroupCtrl.js"></script>
+    <script src="angularCtrls/showContactCtrl.js"></script>
+
+</body>
+</html>
+
